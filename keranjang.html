@@ -1,0 +1,53 @@
+<div class="border-t pt-4 space-y-3">
+  <div>
+    <label class="block text-sm font-bold text-gray-700 mb-1"
+      >Tipe Pesanan</label
+    >
+    <select
+      id="order-type"
+      onchange="toggleLokasi()"
+      class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm bg-white"
+    >
+      <option value="Dine-in">🍽️ Makan di Tempat (Dine-in)</option>
+      <option value="Takeaway">bagging Bawa Pulang (Takeaway)</option>
+      <option value="Delivery">🛵 Pesan Antar (Delivery)</option>
+    </select>
+  </div>
+
+  <div>
+    <label id="label-lokasi" class="block text-sm font-bold text-gray-700 mb-1"
+      >Nomor Meja</label
+    >
+    <input
+      type="text"
+      id="input-lokasi"
+      placeholder="Contoh: Meja 12"
+      class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm"
+    />
+  </div>
+
+  <div>
+    <label class="block text-sm font-bold text-gray-700 mb-1"
+      >Catatan (Opsional)</label
+    >
+    <textarea
+      id="input-catatan"
+      rows="2"
+      placeholder="Contoh: Kopi jangan terlalu manis, es dipisah..."
+      class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm"
+    ></textarea>
+  </div>
+
+  <div class="flex justify-between text-lg font-bold mt-4">
+    <span>Total:</span>
+    <span id="cart-total" class="text-amber-700">Rp 0</span>
+  </div>
+
+  <button
+    onclick="prosesCheckout()"
+    class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg flex justify-center items-center gap-2 shadow-lg transition"
+  >
+    <span class="text-xl">📱</span>
+    <span>Kirim Pesanan ke WA</span>
+  </button>
+</div>
