@@ -70,7 +70,7 @@ const products = [
     price: 36000,
     category: "makanan",
     image:
-      "https://www.ajinomoto.co.id/image/original/visit/2025/01/16/images/thumbnail-resep-nasi-goreng-rempah-wangi._667e84e594d3e64e0f47781bd9b17f68.png",
+      "https://assets-src.ajinomoto.co.id/uploads/visit/2025/01/16/images/thumbnail-resep-nasi-goreng-rempah-wangi._667e84e594d3e64e0f47781bd9b17f68.png",
   },
   {
     id: 10,
