@@ -769,20 +769,22 @@ function prosesCheckout() {
   const adminWA = "6281292772775";
   const calc = calculateTotal();
 
+  // 1. Header Pesanan
   let msg = `*ORDER BARU - AQASHH COFFEE* ☕%0A`;
   msg += `--------------------------------%0A`;
   msg += `👤 *Pemesan:* ${currentUser.nama}%0A`;
   msg += `📞 *No HP:* ${currentUser.hp}%0A`;
   msg += `🛍️ *Tipe:* ${orderType}%0A`;
-  msg += `💳 *Bayar:* ${paymentMethod}%0A`;
-  msg += `📍 *Info:* ${lokasi}%0A`;
+  msg += `📍 *Info Lokasi:* ${lokasi}%0A`;
   msg += `--------------------------------%0A`;
 
+  // 2. Daftar Pesanan
   msg += `*Daftar Pesanan:*%0A`;
   cart.forEach((item) => {
     msg += `- ${item.name} (${item.qty}x) = Rp ${(item.price * item.qty).toLocaleString("id-ID")}%0A`;
   });
 
+  // 3. Kalkulasi Biaya
   msg += `--------------------------------%0A`;
   msg += `📝 *Catatan:* ${catatan || "-"}%0A`;
   msg += `▫️ *Subtotal:* Rp ${calc.subtotal.toLocaleString("id-ID")}%0A`;
@@ -794,12 +796,22 @@ function prosesCheckout() {
      msg += `🎉 *Diskon (15%):* - Rp ${calc.discount.toLocaleString("id-ID")}%0A`;
   }
   
-  msg += `💰 *TOTAL BAYAR: Rp ${calc.finalTotal.toLocaleString("id-ID")}*%0A%0A`;
-  msg += `Mohon diproses segera ya, terima kasih!`;
+  msg += `💰 *TOTAL BAYAR: Rp ${calc.finalTotal.toLocaleString("id-ID")}*%0A`;
+  msg += `--------------------------------%0A`;
+
+  // 4. LOGIKA KUSTOMISASI PEMBAYARAN DI SINI
+  msg += `💳 *Metode Pembayaran: ${paymentMethod}*%0A`;
+  if (paymentMethod === "QRIS") {
+      msg += `📸 _Catatan: Saya membayar menggunakan QRIS/E-Wallet. Bukti transfer/screenshot akan saya kirimkan tepat setelah pesan ini. Mohon ditunggu ya!_%0A%0A`;
+  } else {
+      // Jika Tunai
+      msg += `💵 _Catatan: Saya akan membayar secara tunai langsung (di kasir / kepada kurir)._%0A%0A`;
+  }
+
+  msg += `Mohon diproses segera, terima kasih!`;
 
   window.open(`https://wa.me/${adminWA}?text=${msg}`, "_blank");
 }
-
 // --- UTILS ---
 function showToast(message) {
   const toast = document.getElementById("toast");
