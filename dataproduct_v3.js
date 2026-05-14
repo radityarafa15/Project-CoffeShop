@@ -61,7 +61,7 @@ const products = [
     name: "Nasi Goreng Rempah",
     price: 36000,
     category: "makanan",
-    image: "https://i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/299ad5a8-3de3-46f5-b213-8b697e20aee7_Go-Food-Merchant_20250521_004641.jpeg",
+    image: "https://assets.unileversolutions.com/recipes-v2/258052.jpg",
   },
   {
     id: 10,
