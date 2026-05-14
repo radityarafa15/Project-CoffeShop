@@ -6,12 +6,15 @@
     <title>Aqashh - Premium Coffee Shop</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       body {
         font-family: "Poppins", sans-serif;
+      }
+      .font-serif-custom {
+        font-family: 'Playfair Display', serif;
       }
       .no-scrollbar::-webkit-scrollbar {
         display: none;
@@ -27,14 +30,18 @@
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
+      /* Soft shadow untuk modal */
+      .modal-shadow {
+        box-shadow: 0 25px 50px -12px rgba(120, 53, 15, 0.25);
+      }
     </style>
   </head>
-  <body class="bg-yellow-50 text-gray-800">
+  <body class="bg-[#fcf8f2] text-gray-800">
     <!-- Navigation -->
-    <nav class="bg-white shadow-md fixed w-full z-40 top-0 left-0">
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-40 top-0 left-0 border-b border-amber-50">
       <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
         <h1
-          class="text-xl md:text-2xl font-bold text-amber-900 cursor-pointer flex items-center gap-2"
+          class="text-xl md:text-2xl font-bold text-amber-900 cursor-pointer flex items-center gap-2 font-serif-custom tracking-wide"
           onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
         >
           <span>🍵</span> Aqashh Coffee
@@ -45,7 +52,7 @@
             <button
               id="btn-login"
               onclick="toggleLoginModal()"
-              class="text-amber-800 font-bold hover:bg-amber-100 px-3 py-1 rounded transition text-sm md:text-base"
+              class="text-amber-800 font-bold hover:bg-amber-50 px-4 py-2 rounded-full transition text-sm md:text-base border border-transparent hover:border-amber-200"
             >
               Masuk
             </button>
@@ -57,18 +64,18 @@
               >
               <button
                 onclick="logout()"
-                class="text-xs text-red-500 border border-red-500 px-2 py-1 rounded hover:bg-red-500 hover:text-white transition"
+                class="text-xs text-red-500 border border-red-200 px-3 py-1 rounded-full hover:bg-red-50 hover:border-red-500 transition"
               >
                 Logout
               </button>
             </div>
           </div>
 
-          <div class="relative cursor-pointer" onclick="toggleCart()">
-            <span class="text-2xl">🛒</span>
+          <div class="relative cursor-pointer bg-amber-50 p-2 rounded-full hover:bg-amber-100 transition" onclick="toggleCart()">
+            <span class="text-xl">🛒</span>
             <span
               id="cart-count"
-              class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full hidden"
+              class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full hidden shadow-sm"
               >0</span
             >
           </div>
@@ -78,167 +85,192 @@
 
     <!-- Hero Section -->
     <header
-      class="mt-16 bg-amber-900 text-white py-24 text-center px-4 bg-[url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1600')] bg-cover bg-center bg-blend-multiply"
+      class="mt-16 relative bg-amber-900 text-white py-28 md:py-36 text-center px-4 overflow-hidden"
     >
-      <h2 class="text-3xl md:text-5xl font-bold mb-4 drop-shadow-md">
-        Nikmati Kopi Terbaik
-      </h2>
-      <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
-        Nikmati Kopi Premium dengan Harga Terjangkau di Aqashh Coffee.
-      </p>
-      <button
-        onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })"
-        class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-8 rounded-full transition shadow-lg transform hover:scale-105"
-      >
-        Pesan Sekarang
-      </button>
+      <!-- Background Image with Overlay -->
+      <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=1600')] bg-cover bg-center"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-amber-950/80 via-amber-900/70 to-amber-900/90"></div>
+      
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="text-4xl md:text-6xl font-bold mb-6 font-serif-custom drop-shadow-lg leading-tight">
+          Seni Meracik<br>Kopi & Cerita
+        </h2>
+        <p class="text-lg md:text-xl text-amber-50 mb-10 font-light tracking-wide drop-shadow-md">
+          Nikmati Kopi Premium dengan Biji Pilihan Nusantara di Aqashh Coffee.
+        </p>
+        <button
+          onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })"
+          class="bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold py-3.5 px-8 rounded-full transition shadow-[0_8px_30px_rgb(245,158,11,0.3)] transform hover:-translate-y-1"
+        >
+          Lihat Menu
+        </button>
+      </div>
     </header>
 
     <!-- Menu Section -->
-    <section id="menu" class="max-w-6xl mx-auto px-4 py-16">
-      <h3 class="text-3xl font-bold text-gray-800 text-center mb-8">
-        Daftar Menu
-      </h3>
+    <section id="menu" class="max-w-6xl mx-auto px-4 py-20">
+      <div class="text-center mb-12">
+        <span class="text-amber-600 font-semibold tracking-wider text-sm uppercase">Menu Spesial Kami</span>
+        <h3 class="text-3xl md:text-4xl font-bold text-gray-800 font-serif-custom mt-2">
+          Pilihan Favorit
+        </h3>
+        <div class="w-24 h-1 bg-amber-500 mx-auto mt-4 rounded-full"></div>
+      </div>
 
       <!-- Search Bar -->
-      <div class="mb-8 max-w-md mx-auto">
-        <div class="relative">
-          <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">🔍</span>
+      <div class="mb-10 max-w-md mx-auto">
+        <div class="relative group">
+          <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-amber-800/50 group-focus-within:text-amber-600 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+          </span>
           <input
             type="text"
             id="search-input"
             onkeyup="searchProduct()"
-            placeholder="Cari kopi atau makanan favoritmu..."
-            class="w-full border border-amber-200 px-10 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500 shadow-sm transition-all"
+            placeholder="Cari kopi, pastry, atau makanan..."
+            class="w-full border-2 border-amber-100 px-12 py-3.5 rounded-full focus:outline-none focus:border-amber-400 focus:ring-4 focus:ring-amber-400/20 shadow-sm transition-all bg-white"
           />
         </div>
       </div>
 
-      <!-- Categories -->
-      <div
-        class="flex overflow-x-auto pb-4 gap-3 mb-8 whitespace-nowrap no-scrollbar px-2 justify-start md:justify-center"
-      >
-        <button
-          onclick="filterProduk('all')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium active-category"
+      <!-- Categories (Sticky) -->
+      <div class="sticky top-[72px] z-30 bg-[#fcf8f2]/90 backdrop-blur-md py-4 mb-8 -mx-4 px-4 border-b border-amber-100/50">
+        <div
+          class="flex overflow-x-auto gap-3 whitespace-nowrap no-scrollbar justify-start md:justify-center max-w-6xl mx-auto"
         >
-          Semua
-        </button>
-        <button
-          onclick="filterProduk('Coffee')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium"
-        >
-          Coffee
-        </button>
-        <button
-          onclick="filterProduk('Non-Coffee')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium"
-        >
-          Non-Coffee
-        </button>
-        <button
-          onclick="filterProduk('makanan')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium"
-        >
-          Makanan
-        </button>
-        <button
-          onclick="filterProduk('pastry')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium"
-        >
-          Pastry
-        </button>
-        <button
-          onclick="filterProduk('Mocktail')"
-          class="category-btn px-6 py-2 bg-white border border-amber-100 shadow-sm rounded-full hover:bg-amber-800 hover:text-white transition flex-shrink-0 text-amber-900 font-medium"
-        >
-          Mocktail
-        </button>
+          <button onclick="filterProduk('all')" class="category-btn px-6 py-2 bg-amber-800 text-white shadow-md rounded-full transition flex-shrink-0 font-medium active-category hover:bg-amber-900">Semua</button>
+          <button onclick="filterProduk('Coffee')" class="category-btn px-6 py-2 bg-white text-amber-900 border border-amber-200 rounded-full hover:bg-amber-50 transition flex-shrink-0 font-medium">Coffee</button>
+          <button onclick="filterProduk('Non-Coffee')" class="category-btn px-6 py-2 bg-white text-amber-900 border border-amber-200 rounded-full hover:bg-amber-50 transition flex-shrink-0 font-medium">Non-Coffee</button>
+          <button onclick="filterProduk('makanan')" class="category-btn px-6 py-2 bg-white text-amber-900 border border-amber-200 rounded-full hover:bg-amber-50 transition flex-shrink-0 font-medium">Makanan</button>
+          <button onclick="filterProduk('pastry')" class="category-btn px-6 py-2 bg-white text-amber-900 border border-amber-200 rounded-full hover:bg-amber-50 transition flex-shrink-0 font-medium">Pastry</button>
+          <button onclick="filterProduk('Mocktail')" class="category-btn px-6 py-2 bg-white text-amber-900 border border-amber-200 rounded-full hover:bg-amber-50 transition flex-shrink-0 font-medium">Mocktail</button>
+        </div>
       </div>
 
       <!-- Product List -->
       <div
         id="product-list"
-        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+        class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8"
       ></div>
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-amber-900 text-amber-50 py-12 mt-16 border-t-4 border-amber-700">
-      <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-10 text-center md:text-left">
+    <footer class="bg-amber-950 text-amber-50 py-16 mt-10">
+      <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
         <div>
-          <h4 class="text-xl font-bold mb-4 flex items-center justify-center md:justify-start gap-2 text-amber-400">
+          <h4 class="text-2xl font-bold mb-4 flex items-center justify-center md:justify-start gap-2 text-amber-400 font-serif-custom">
             <span>🍵</span> Aqashh Coffee
           </h4>
-          <p class="text-sm text-amber-200 leading-relaxed">
-            Menyajikan kopi premium dengan biji pilihan terbaik nusantara. Tempat terbaik untuk diskusi, inspirasi, dan relaksasi.
+          <p class="text-sm text-amber-200/80 leading-relaxed font-light">
+            Menyajikan kopi premium dengan biji pilihan terbaik nusantara. Tempat terbaik untuk diskusi, inspirasi, dan relaksasi sejak 2026.
           </p>
         </div>
         <div>
-          <h4 class="text-lg font-bold mb-4 text-amber-400">Jam Operasional</h4>
-          <ul class="text-sm space-y-2 text-amber-200">
-            <li>Senin - Jumat: 08.00 - 22.00 WIB</li>
-            <li>Sabtu - Minggu: 09.00 - 23.00 WIB</li>
+          <h4 class="text-lg font-bold mb-5 text-amber-400 uppercase tracking-wider text-sm">Jam Operasional</h4>
+          <ul class="text-sm space-y-3 text-amber-200/80 font-light">
+            <li class="flex justify-between md:justify-start md:gap-4 border-b border-amber-900/50 pb-2"><span>Senin - Jumat</span> <span>08.00 - 22.00</span></li>
+            <li class="flex justify-between md:justify-start md:gap-4 border-b border-amber-900/50 pb-2"><span>Sabtu - Minggu</span> <span>09.00 - 23.00</span></li>
           </ul>
         </div>
         <div>
-          <h4 class="text-lg font-bold mb-4 text-amber-400">Lokasi & Kontak</h4>
-          <p class="text-sm text-amber-200 mb-3">Jl. Veteran, Lowokwaru, Kota Malang (Dekat FILKOM UB)</p>
-          <div class="flex flex-col gap-1 items-center md:items-start">
-            <span class="text-sm text-amber-200 italic">IG: @aqashhcoffee</span>
-            <span class="text-sm text-amber-200 italic">WA: +62 812-9277-2775</span>
+          <h4 class="text-lg font-bold mb-5 text-amber-400 uppercase tracking-wider text-sm">Lokasi & Kontak</h4>
+          <p class="text-sm text-amber-200/80 mb-4 font-light leading-relaxed">Jl. Veteran, Lowokwaru,<br>Kota Malang (Dekat FILKOM UB)</p>
+          <div class="flex flex-col gap-2 items-center md:items-start font-light">
+            <a href="#" class="text-sm text-amber-400 hover:text-white transition flex items-center gap-2"><span>📷</span> @aqashhcoffee</a>
+            <a href="#" class="text-sm text-amber-400 hover:text-white transition flex items-center gap-2"><span>💬</span> +62 812-9277-2775</a>
           </div>
         </div>
       </div>
-      <div class="text-center text-xs text-amber-500 mt-12 pt-6 border-t border-amber-800">
-        &copy; 2026 Aqashh Coffee. Made with ❤️ for Coffee Lovers.
+      <div class="text-center text-xs text-amber-700 mt-16 pt-8 border-t border-amber-900/50 font-light">
+        &copy; 2026 Aqashh Coffee. Crafted with passion.
       </div>
     </footer>
+
+    <!-- Product Detail Modal (NEW) -->
+    <div id="product-modal" class="fixed inset-0 bg-amber-950/80 backdrop-blur-sm hidden z-50 flex justify-center items-center px-4 transition-all">
+      <div class="bg-white rounded-2xl modal-shadow w-full max-w-md relative animate-fade-in-up overflow-hidden flex flex-col max-h-[90vh]">
+        <button onclick="closeProductModal()" class="absolute top-4 right-4 bg-white/50 backdrop-blur-md rounded-full p-2 text-gray-800 hover:bg-white hover:text-red-500 z-10 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+        
+        <div class="h-64 w-full relative shrink-0">
+          <img id="modal-img" src="" alt="Product Image" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-4 left-6">
+            <span id="modal-category" class="bg-amber-500 text-white text-[10px] px-2.5 py-1 rounded-sm font-bold uppercase tracking-wider shadow-sm">Kategori</span>
+          </div>
+        </div>
+        
+        <div class="p-6 flex-1 overflow-y-auto no-scrollbar">
+          <div class="mb-4">
+            <h3 id="modal-title" class="text-2xl font-bold text-gray-800 font-serif-custom leading-tight mb-1">Nama Produk</h3>
+            <p id="modal-price" class="text-xl font-bold text-amber-600">Rp 0</p>
+          </div>
+          
+          <div class="mb-6">
+            <p id="modal-desc" class="text-gray-600 text-sm leading-relaxed font-light">Deskripsi produk akan muncul di sini.</p>
+          </div>
+        </div>
+
+        <!-- Sticky Footer for Add to Cart -->
+        <div class="p-4 border-t border-gray-100 bg-gray-50 flex items-center gap-4 shrink-0">
+          <div class="flex items-center bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
+            <button onclick="changeModalQty(-1)" class="px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-amber-800 transition font-bold text-lg leading-none">-</button>
+            <span id="modal-qty" class="text-sm font-bold w-6 text-center text-gray-800">1</span>
+            <button onclick="changeModalQty(1)" class="px-4 py-3 text-gray-600 hover:bg-gray-50 hover:text-amber-800 transition font-bold text-lg leading-none">+</button>
+          </div>
+          <button id="modal-add-btn" class="flex-1 bg-amber-800 hover:bg-amber-900 text-white font-bold py-3.5 rounded-xl transition shadow-[0_4px_14px_0_rgb(146,64,14,0.3)] flex justify-center items-center gap-2 active:scale-[0.98]">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            <span>Tambah</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Login Modal -->
     <div
       id="login-modal"
-      class="fixed inset-0 bg-black bg-opacity-60 hidden z-50 flex justify-center items-center px-4"
+      class="fixed inset-0 bg-amber-950/80 backdrop-blur-sm hidden z-50 flex justify-center items-center px-4"
     >
       <div
-        class="bg-white p-8 rounded-xl shadow-2xl w-full max-sm relative animate-fade-in-up"
+        class="bg-white p-8 rounded-2xl modal-shadow w-full max-w-sm relative animate-fade-in-up"
       >
         <button
           onclick="toggleLoginModal()"
-          class="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-2xl font-bold"
+          class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition p-2"
         >
-          &times;
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
-        <h3 class="text-2xl font-bold text-center text-amber-900 mb-2">
-          Selamat Datang!
+        <h3 class="text-2xl font-bold text-center text-gray-800 font-serif-custom mb-2">
+          Selamat Datang
         </h3>
-        <p class="text-gray-500 text-center mb-6 text-sm">
-          Simpan data agar pemesanan lebih cepat.
+        <p class="text-gray-500 text-center mb-8 text-sm font-light">
+          Simpan info kontak untuk pemesanan instan.
         </p>
-        <div class="space-y-4">
+        <div class="space-y-5">
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1">Nama Lengkap</label>
+            <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase tracking-wide">Nama Lengkap</label>
             <input
               type="text"
               id="input-nama"
               placeholder="Contoh: Raditya Rafa"
-              class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+              class="w-full border-b-2 border-gray-200 px-2 py-2 bg-transparent focus:outline-none focus:border-amber-600 transition-colors text-gray-800"
             />
           </div>
           <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1">Nomor WhatsApp</label>
+            <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase tracking-wide">Nomor WhatsApp</label>
             <input
               type="number"
               id="input-hp"
               placeholder="Contoh: 08123456789"
-              class="w-full border border-gray-300 px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+              class="w-full border-b-2 border-gray-200 px-2 py-2 bg-transparent focus:outline-none focus:border-amber-600 transition-colors text-gray-800"
             />
           </div>
           <button
             onclick="simpanAkun()"
-            class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3 rounded-lg transition shadow-lg"
+            class="w-full bg-amber-800 hover:bg-amber-900 text-white font-bold py-3.5 rounded-xl transition shadow-md mt-4"
           >
-            Simpan Data
+            Simpan & Lanjutkan
           </button>
         </div>
       </div>
@@ -247,89 +279,98 @@
     <!-- Cart Modal -->
     <div
       id="cart-modal"
-      class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex justify-end"
+      class="fixed inset-0 bg-amber-950/70 backdrop-blur-sm hidden z-50 flex justify-end"
     >
       <div
-        class="bg-white w-full max-w-md h-full p-6 overflow-y-auto shadow-xl transition-transform transform translate-x-full flex flex-col"
+        class="bg-[#fcf8f2] w-full max-w-md h-full overflow-y-auto shadow-2xl transition-transform transform translate-x-full flex flex-col"
         id="cart-panel"
       >
-        <div class="flex justify-between items-center mb-6 border-b pb-4">
-          <h3 class="text-xl font-bold text-amber-900">Pesanan Anda</h3>
+        <div class="flex justify-between items-center p-6 bg-white border-b border-gray-100 shadow-sm shrink-0">
+          <h3 class="text-xl font-bold text-gray-800 font-serif-custom flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+            Pesanan Saya
+          </h3>
           <button
             onclick="toggleCart()"
-            class="text-gray-400 hover:text-red-500 font-bold text-2xl"
+            class="text-gray-400 hover:text-red-500 transition p-2 bg-gray-50 hover:bg-red-50 rounded-full"
           >
-            &times;
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </div>
 
-        <div id="cart-items" class="flex-1 space-y-4 mb-6 overflow-y-auto no-scrollbar">
+        <div id="cart-items" class="flex-1 p-6 space-y-4 overflow-y-auto no-scrollbar">
           <!-- Item keranjang akan muncul di sini -->
         </div>
 
-        <div class="border-t pt-4 space-y-3 bg-gray-50 p-4 rounded-lg">
-          <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1">Tipe Pesanan</label>
-            <select
-              id="order-type"
-              onchange="toggleLokasi()"
-              class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm bg-white focus:ring-2 focus:ring-amber-500 outline-none"
-            >
-              <option value="Dine-in">🍽️ Makan di Tempat (Dine-in)</option>
-              <option value="Takeaway">🥡 Bawa Pulang (Takeaway)</option>
-              <option value="Delivery">🛵 Pesan Antar (Delivery)</option>
-            </select>
+        <div class="bg-white p-6 rounded-t-3xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)] shrink-0">
+          <div class="space-y-4 mb-6">
+            <div>
+              <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase">Tipe Pesanan</label>
+              <select
+                id="order-type"
+                onchange="toggleLokasi()"
+                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none transition"
+              >
+                <option value="Dine-in">Dine-in (Makan di Tempat)</option>
+                <option value="Takeaway">Takeaway (Bawa Pulang)</option>
+                <option value="Delivery">Delivery (Pesan Antar)</option>
+              </select>
+            </div>
+
+            <!-- Fitur QRIS Payment -->
+            <div>
+              <label class="block text-xs font-bold text-gray-500 mb-1.5 uppercase">Pembayaran</label>
+              <select
+                id="payment-method"
+                onchange="toggleQRIS()"
+                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none transition"
+              >
+                <option value="Tunai">Tunai (Di Kasir / Kurir)</option>
+                <option value="QRIS">QRIS / E-Wallet</option>
+              </select>
+            </div>
+
+            <div id="qris-container" class="hidden mt-2 p-5 bg-white border border-amber-200 rounded-2xl text-center shadow-inner relative overflow-hidden">
+              <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-300 to-amber-600"></div>
+              <p class="text-[11px] font-bold text-gray-600 mb-3 tracking-wider">SCAN UNTUK MEMBAYAR</p>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="QRIS Aqashh Coffee" class="w-36 h-36 mx-auto mb-3 rounded-lg p-1 border border-gray-100">
+              <p class="text-sm text-gray-800 font-bold">AQASHH COFFEE</p>
+              <p class="text-[10px] text-amber-600 mt-2 bg-amber-50 py-1 rounded-full">*Sertakan bukti transfer di chat WA</p>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <label id="label-lokasi" class="block text-xs font-bold text-gray-500 mb-1.5 uppercase">Nomor Meja</label>
+                <input
+                  type="text"
+                  id="input-lokasi"
+                  placeholder="Contoh: 12"
+                  class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none transition"
+                />
+              </div>
+            </div>
+            
+            <div>
+              <textarea
+                id="input-catatan"
+                rows="2"
+                placeholder="Catatan pesanan (opsional)..."
+                class="w-full bg-gray-50 border border-gray-200 px-4 py-2.5 rounded-xl text-sm focus:ring-2 focus:ring-amber-500 outline-none transition resize-none"
+              ></textarea>
+            </div>
           </div>
 
-          <!-- Fitur QRIS Payment -->
-          <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1">Metode Pembayaran</label>
-            <select
-              id="payment-method"
-              onchange="toggleQRIS()"
-              class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm bg-white focus:ring-2 focus:ring-amber-500 outline-none"
-            >
-              <option value="Tunai">💵 Tunai (Bayar di Kasir)</option>
-              <option value="QRIS">📸 QRIS / E-Wallet</option>
-            </select>
+          <div class="flex justify-between items-end mb-5 pt-4 border-t border-gray-100">
+            <span class="text-gray-500 font-medium">Total Harga</span>
+            <span id="cart-total" class="text-2xl font-bold text-amber-700">Rp 0</span>
           </div>
-
-          <div id="qris-container" class="hidden mt-4 p-4 bg-white border-2 border-dashed border-amber-200 rounded-xl text-center">
-            <p class="text-[10px] font-bold text-amber-800 mb-2">SCAN UNTUK MEMBAYAR</p>
-            <!-- Ganti URL di bawah dengan link gambar QRIS asli Anda -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" alt="QRIS Aqashh Coffee" class="w-32 h-32 mx-auto mb-2">
-            <p class="text-[10px] text-gray-500 font-semibold">A.N. AQASHH COFFEE</p>
-            <p class="text-[9px] text-red-500 mt-1 italic">*Mohon screenshot bukti bayar setelah scan</p>
-          </div>
-
-          <div>
-            <label id="label-lokasi" class="block text-sm font-bold text-gray-700 mb-1">Nomor Meja</label>
-            <input
-              type="text"
-              id="input-lokasi"
-              placeholder="Contoh: Meja 12"
-              class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none"
-            />
-          </div>
-          <div>
-            <label class="block text-sm font-bold text-gray-700 mb-1">Catatan (Opsional)</label>
-            <textarea
-              id="input-catatan"
-              rows="2"
-              placeholder="Contoh: Kopi jangan terlalu manis..."
-              class="w-full border border-gray-300 px-3 py-2 rounded-lg text-sm focus:ring-2 focus:ring-amber-500 outline-none"
-            ></textarea>
-          </div>
-          <div class="flex justify-between text-lg font-bold mt-4 pt-2 border-t border-gray-200">
-            <span>Total:</span>
-            <span id="cart-total" class="text-amber-700">Rp 0</span>
-          </div>
+          
           <button
             onclick="prosesCheckout()"
-            class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-lg flex justify-center items-center gap-2 shadow-lg transition transform hover:scale-[1.02]"
+            class="w-full bg-[#25D366] hover:bg-[#1ebd5c] text-white font-bold py-4 rounded-xl flex justify-center items-center gap-3 shadow-[0_4px_14px_0_rgb(37,211,102,0.3)] transition transform hover:-translate-y-0.5"
           >
-            <span class="text-xl">📱</span>
-            <span>Kirim Pesanan ke WA</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Pesan via WhatsApp
           </button>
         </div>
       </div>
@@ -338,13 +379,15 @@
     <!-- Toast Notification -->
     <div
       id="toast"
-      class="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-6 py-3 rounded-full shadow-2xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 flex items-center gap-2 text-sm"
+      class="fixed top-24 right-4 md:right-10 bg-gray-900/90 backdrop-blur-sm text-white px-5 py-3 rounded-xl shadow-2xl opacity-0 transition-all duration-300 pointer-events-none z-50 flex items-center gap-3 text-sm transform translate-y-[-20px]"
     >
-      <span id="toast-icon">✅</span>
-      <span id="toast-message">Berhasil!</span>
+      <div class="bg-green-500 rounded-full p-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+      </div>
+      <span id="toast-message" class="font-medium">Berhasil!</span>
     </div>
 
     <!-- External Script -->
-    <script src="dataproduct_v3.js"></script>
+    <script src="dataproduct_v4.js"></script>
   </body>
 </html>
